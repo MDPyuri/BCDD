@@ -4,15 +4,17 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+//explique o que cada linha faz
+//define o nome do arquivo
 generator client {
   provider = "prisma-client-js"
 }
-
+//define o banco de dados
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
+//define as tabelas do banco de dados
 model Music {
   id       Int      @id @default(autoincrement())
   title    String   @db.VarChar(50)
@@ -23,12 +25,12 @@ model Music {
   release  Int      @db.Year
   duration DateTime @db.Time
 }
-
+//o enum é um tipo de dado que pode ser usado para definir um conjunto de constantes nomeadas
 enum Role {
   USER
   ADMIN
 }
-
+//define as tabelas do banco de dados
 model User {
   id         BigInt   @id @default(autoincrement())
   name       String   @db.VarChar(50)
@@ -39,7 +41,7 @@ model User {
   birth      DateTime
   created_at DateTime @default(now()) @db.Timestamp()
 }
-
+//define as tabelas do banco de dados
 model Product {
   id                Int      @id @default(autoincrement())
   name              String   @db.VarChar(50)

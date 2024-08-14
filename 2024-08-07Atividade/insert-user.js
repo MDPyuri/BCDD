@@ -1,22 +1,58 @@
 // importa o prisma
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 
 //instancia o prisma
 const prisma = new PrismaClient();
 
-//cria um array de objetos com as músicas
+//cria um array de objetos com usuários
 async function main() {
     const data = [
-        { title: 'Astronomia', kind: 'Eletrônica', artist: 'Vicetone', album: 'Astronomia', single: false, release: '2014-06-13', duration: '3:19'},
-        { title: 'The Nights', kind: 'Eletrônica', artist: 'Avicii', album: 'The Days / Nights', single: false, release: '2014-12-01', duration: '2:56'},
-        { title: 'Wake Me Up', kind: 'Eletrônica', artist: 'Avicii', album: 'True', single: false, release: '2013-06-17', duration: '4:09'},
-        { title: 'Levels', kind: 'Eletrônica', artist: 'Avicii', album: 'Levels', single: false, releae: '2011-07-28', duration: '3:22'},
-        { title: 'Hey Brother', kind: 'Eletrônica', artist: 'Avicii', album: 'True', single: false, release: '2013-09-01', duration: '4:14'},
+        {
+            name: "Alice Silva",
+            username: "alice_silva",
+            role: "USER",
+            email: "alice@example.com",
+            password: "senha123",
+            birth: new Date("1990-01-01"),
+        },
+        {
+            name: "Bruno Costa",
+            username: "bruno_costa",
+            role: "USER",
+            email: "bruno@example.com",
+            password: "senha123",
+            birth: new Date("1992-02-02"),
+        },
+        {
+            name: "Carla Souza",
+            username: "carla_souza",
+            role: "USER",
+            email: "carla@example.com",
+            password: "senha123",
+            birth: new Date("1994-03-03"),
+        },
+        {
+            name: "Daniel Lima",
+            username: "daniel_lima",
+            role: "USER",
+            email: "daniel@example.com",
+            password: "senha123",
+            birth: new Date("1996-04-04"),
+        },
+        {
+            name: "Elena Rocha",
+            username: "elena_rocha",
+            role: "USER",
+            email: "elena@example.com",
+            password: "senha123",
+            birth: new Date("1998-05-05"),
+        },
     ];
-    //cadastra as músicas no banco de dados
-    await prisma.user.createMany({ data });
-    //exibe a mensagem de sucesso
-    console.log("Músicas cadastradas com sucesso!");
+
+  //cadastra os usuários no banco de dados
+    await prisma.User.createMany({ data });
+  //exibe a mensagem de sucesso
+    console.log("Usuários cadastrados com sucesso!");
 }
 
 //chama a função main

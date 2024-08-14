@@ -55,7 +55,7 @@ async function main() {
     ];
 
     //cadastra as músicas no banco de dados
-    await prisma.music.createMany({ data });
+    await prisma.Music.createMany({ data });
     //exibe a mensagem de sucesso
     console.log("Músicas cadastradas com sucesso!");
 }
