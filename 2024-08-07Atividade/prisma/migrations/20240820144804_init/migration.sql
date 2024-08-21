@@ -21,7 +21,7 @@ CREATE TABLE `User` (
     `email` VARCHAR(50) NOT NULL,
     `password` VARCHAR(50) NOT NULL,
     `birth` DATETIME(3) NOT NULL,
-    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     UNIQUE INDEX `User_username_key`(`username`),
     UNIQUE INDEX `User_email_key`(`email`),

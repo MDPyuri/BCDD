@@ -13,8 +13,8 @@ async function main() {
             artist: "Tom Jobim",
             album: "Getz/Gilberto",
             single: false,
-            release: new Date('1964-03-10'),
-            duration: "5:25",
+            release: 1964,
+            duration: new Date("2024-01-01 00:05:25")
         },
         {
             title: "Águas de Março",
@@ -22,8 +22,8 @@ async function main() {
             artist: "Tom Jobim",
             album: "Elis & Tom",
             single: false,
-            release: "1974-01-01",
-            duration: "3:32",
+            release: 1974,
+            duration: new Date("2024-01-01 00:03:32")
         },
         {
             title: "Chega de Saudade",
@@ -31,8 +31,8 @@ async function main() {
             artist: "João Gilberto",
             album: "Chega de Saudade",
             single: false,
-            release: "1959-01-01",
-            duration: "2:00",
+            release: 1959,
+            duration: new Date("2024-01-01 00:02:00")
         },
         {
             title: "Wave",
@@ -40,8 +40,8 @@ async function main() {
             artist: "Tom Jobim",
             album: "Wave",
             single: false,
-            release: "1967-01-01",
-            duration: "2:56",
+            release: 1967,
+            duration: new Date("2024-01-01 00:02:56")
         },
         {
             title: "O Barquinho",
@@ -49,8 +49,8 @@ async function main() {
             artist: "Roberto Menescal",
             album: "O Barquinho",
             single: false,
-            release: "1961-01-01",
-            duration: "2:49",
+            release: 1961,
+            duration: new Date("2024-01-01 00:02:49")
         },
     ];
 
@@ -60,5 +60,5 @@ async function main() {
     console.log("Músicas cadastradas com sucesso!");
 }
 
-//chama a função main
+//chama a função main
 main();
