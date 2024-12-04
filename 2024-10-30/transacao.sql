@@ -1,0 +1,66 @@
+DROP DATABASE IF EXISTS transactionsdb;
+CREATE DATABASE transactionsdb;
+USE transactionsdb;
+
+CREATE TABLE `Conta` (
+id INT NOT NULL AUTO_INCREMENT,
+cliente VARCHAR(100) NOT NULL,
+saldo DECIMAL(15, 2) NOT NULL DEFAULT 0,
+criacao TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+PRIMARY KEY (id)
+);
+
+CREATE TABLE Transacao (
+id INT NOT NULL AUTO_INCREMENT,
+origem INT NULL,
+destino INT NULL,
+tipo ENUM('Saque', 'Depósito', 'Transferência') NOT NULL,
+valor DECIMAL(15, 2) NOT NULL,
+data TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+CHECK (valor > 0),
+PRIMARY KEY (id),
+FOREIGN KEY (origem) REFERENCES `Conta`(id),
+FOREIGN KEY (destino) REFERENCES `Conta`(id)
+);
+
+-- EXEMPLO 1 - PERSISTIR/REVERTER INSERÇÕES DE DADOS
+-- SEQUÊNCIA PARA REVERTER: START > SELECT > INSERT > SELECT > ROLLBACK > SELECT
+-- SEQUÊNCIA PARA PERSISTIR: START > SELECT > INSERT > SELECT > COMMIT > SELECT
+START TRANSACTION;
+COMMIT;
+ROLLBACK;
+
+INSERT INTO `Conta`(cliente) VALUES ('Guilherme'), ('Carlos');
+
+SELECT * FROM `Conta`;
+-- DELETE FROM `Conta` WHERE id > 0;
+
+-- EXEMPLO 2: DEPÓSITO
+START TRANSACTION;
+
+INSERT INTO Transacao (destino, tipo, valor) VALUES (1, 'Depósito', 500); #OP.1
+UPDATE `Conta` SET saldo = saldo + 500 WHERE id = 500; #OP.2
+
+COMMIT;
+
+SELECT * FROM `Conta`;
+SELECT * FROM Transacao;
+
+-- EXEMPLO 3: SAQUE
+START TRANSACTION;
+
+INSERT INTO Transacao (origem, tipo, valor) VALUES (1, 'Saque', 200); #OP.1
+UPDATE `Conta` SET saldo = saldo - 200 WHERE id = 1; #OP.2
+
+COMMIT;
+-- EXEMPLO 4: TRANSFERÊNCIA
+START TRANSACTION;
+
+UPDATE `Conta` SET saldo = saldo - 300 WHERE id = 5; # RETIRAR R$300 DO SALDO DO GUILHERME
+UPDATE `Conta` SET saldo = saldo + 300 WHERE id = 6; # ADICIONAR R$300 DO SALDO DO CARLOS
+INSERT INTO Transacao (origem, destino, tipo, valor) VALUES (1, 2, 'Transferência', 300);
+
+COMMIT;
+
+SELECT * FROM `Conta`;
+SELECT * FROM Transacao;
